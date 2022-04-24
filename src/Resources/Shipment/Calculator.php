@@ -24,7 +24,7 @@ class Calculator
      */
     public function __construct(Resource $resource)
     {
-        if (! $resource instanceof Resource) {
+        if (!$resource instanceof Resource) {
             throw new InvalidResourceException;
         }
 
@@ -58,7 +58,7 @@ class Calculator
      */
     protected function addPostalCodeInPayload(string $key, string $postalCode)
     {
-        if (! $this->isValidPostalCode($postalCode)) {
+        if (!$this->isValidPostalCode($postalCode)) {
             throw new InvalidArgumentException($key);
         }
 
@@ -94,7 +94,7 @@ class Calculator
      */
     public function addPackage(Package $package)
     {
-        if (! $this->isValidPackage($package)) {
+        if (!$this->isValidPackage($package)) {
             throw new InvalidVolumeException('package');
         }
 
@@ -106,7 +106,7 @@ class Calculator
      */
     public function addProduct(Product $product)
     {
-        if (! $this->isValidProduct($product)) {
+        if (!$this->isValidProduct($product)) {
             throw new InvalidVolumeException('product');
         }
 
@@ -130,11 +130,11 @@ class Calculator
      */
     public function addService(int $service)
     {
-        if (! $this->isValidService($service)) {
+        if (!$this->isValidService($service)) {
             throw new InvalidArgumentException('service');
         }
 
-        if (! isset($this->payload['services'])) {
+        if (!isset($this->payload['services'])) {
             $this->payload['services'] = $service;
         } else {
             $this->payload['services'] .= ',' . $service;
@@ -146,7 +146,7 @@ class Calculator
      */
     public function setReceipt(bool $receipt = true)
     {
-        if (! is_bool($receipt)) {
+        if (!is_bool($receipt)) {
             throw new InvalidArgumentException('receipt');
         }
 
@@ -158,7 +158,7 @@ class Calculator
      */
     public function setOwnHand(bool $ownHand = true)
     {
-        if (! is_bool($ownHand)) {
+        if (!is_bool($ownHand)) {
             throw new InvalidArgumentException('own_hand');
         }
 
@@ -170,7 +170,7 @@ class Calculator
      */
     public function setCollect(bool $collect = true)
     {
-        if (! is_bool($collect)) {
+        if (!is_bool($collect)) {
             throw new InvalidArgumentException('collect');
         }
 
@@ -207,7 +207,7 @@ class Calculator
             throw new InvalidCalculatorPayloadException('There are no defined products or volumes.');
         }
 
-        if (! empty($this->payload['volumes']) && ! empty($this->payload['products'])) {
+        if (!empty($this->payload['volumes']) && !empty($this->payload['products'])) {
             throw new InvalidCalculatorPayloadException('Products and volumes cannot be defined together in the same payload.');
         }
     }
@@ -235,7 +235,7 @@ class Calculator
         }
     }
 
-    public function __toString():  ?string
+    public function __toString()
     {
         return json_encode($this->getPayload());
     }
